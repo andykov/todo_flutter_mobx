@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:state_mobx/stores/login_store.dart';
 import 'package:state_mobx/widgets/custom_icon_button.dart';
 import 'package:state_mobx/widgets/custom_text_field.dart';
@@ -15,6 +16,27 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginStore loginStore = LoginStore();
+
+  ReactionDisposer disposer;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    /** Реакция на вход в систему
+     * Первый аргумент принимает значение за которым нужно следить.
+     * В данном случае отслеживаем вход в систему.
+     * Второй аргумент это эффект который вызывается, он возвращает
+     * значение которое было изменено.
+     * Дальше запускается callback функция
+    */
+    disposer = reaction((_) => loginStore.loggedIn, (loggedIn) {
+      if (loggedIn) {
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (_) => ListScreen()));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,5 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  // Обязательно убиваем реакцию которая работает бесконечно
+  @override
+  void dispose() {
+    disposer();
+    super.dispose();
   }
 }

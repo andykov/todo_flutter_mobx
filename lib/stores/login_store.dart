@@ -35,9 +35,13 @@ abstract class _LoginStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  bool loggedIn = false;
+
   // Если логин и пароль действительны и не загружается, то возвращаем к функции входа
   @computed
-  Function get loginPressed => (isEmailValid && isPasswordValid && !loading) ? login : null;
+  Function get loginPressed =>
+      (isEmailValid && isPasswordValid && !loading) ? login : null;
 
   Future<void> login() async {
     loading = true;
@@ -45,6 +49,7 @@ abstract class _LoginStore with Store {
     await Future.delayed(Duration(seconds: 2));
 
     loading = false;
+    loggedIn = true;
   }
 
   // Простая валидация полей
