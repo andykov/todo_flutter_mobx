@@ -32,5 +32,6 @@ abstract class _ListStore with Store {
   @action
   void addTodo() {
     todoList.insert(0, TodoStore(newTodoTitle));
+    newTodoTitle = ""; // очищаем стейт заголовка чтобы пропадала кнопка добавления при очистке поля ввода
   }
 }

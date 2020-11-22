@@ -15,7 +15,8 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-  ListStore listStore = ListStore();
+  final ListStore listStore = ListStore();
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +64,17 @@ class _ListScreenState extends State<ListScreen> {
                       children: <Widget>[
                         Observer(builder: (_) {
                           return CustomTextField(
+                            controller: controller,
                             hint: 'Tarefa',
                             onChanged: listStore.setNewTodoTitle,
                             suffix: listStore.isFormValid
                                 ? CustomIconButton(
                                     radius: 32,
                                     iconData: Icons.add,
-                                    onTap: listStore.addTodo,
+                                    onTap: () {
+                                      listStore.addTodo();
+                                      controller.clear(); // очищает поле ввода
+                                    },
                                   )
                                 : null,
                           );
@@ -90,9 +95,12 @@ class _ListScreenState extends State<ListScreen> {
                                         title: Text(
                                           todo.title,
                                           style: TextStyle(
-                                            decoration: todo.done ? TextDecoration.lineThrough : null,
-                                            color: todo.done ? Colors.grey : Colors.black 
-                                          ),
+                                              decoration: todo.done
+                                                  ? TextDecoration.lineThrough
+                                                  : null,
+                                              color: todo.done
+                                                  ? Colors.grey
+                                                  : Colors.black),
                                         ),
                                         onTap: todo.toggleDone,
                                       );
