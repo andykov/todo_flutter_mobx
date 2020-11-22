@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:state_mobx/stores/login_store.dart';
 import 'package:state_mobx/widgets/custom_icon_button.dart';
 import 'package:state_mobx/widgets/custom_text_field.dart';
@@ -59,22 +60,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  SizedBox(
-                    height: 44,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                      child: Text('Login'),
-                      color: Theme.of(context).primaryColor,
-                      disabledColor:
-                          Theme.of(context).primaryColor.withAlpha(100),
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => ListScreen()));
-                      },
-                    ),
+                  Observer(
+                    builder: (_) {
+                      return SizedBox(
+                        height: 44,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32),
+                          ),
+                          child: Text('Login'),
+                          color: Theme.of(context).primaryColor,
+                          disabledColor:
+                              Theme.of(context).primaryColor.withAlpha(100),
+                          textColor: Colors.white,
+                          onPressed: loginStore.isFormValid ? () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => ListScreen()),
+                            );
+                          } : null,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
