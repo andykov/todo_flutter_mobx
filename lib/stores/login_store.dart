@@ -8,7 +8,7 @@ abstract class _LoginStore with Store {
   // Реагирование на изменение стейта
   _LoginStore() {
     autorun((_) {
-      print('_reaction_ isFormValid: $isFormValid');
+      // print('_reaction_ isFormValid: $isFormValid');
       print('_reaction_ passwordVisible: $passwordVisible');
     });
   }
@@ -35,6 +35,10 @@ abstract class _LoginStore with Store {
   @observable
   bool loading = false;
 
+  // Если логин и пароль действительны и не загружается, то возвращаем к функции входа
+  @computed
+  Function get loginPressed => (isEmailValid && isPasswordValid && !loading) ? login : null;
+
   Future<void> login() async {
     loading = true;
 
@@ -52,6 +56,6 @@ abstract class _LoginStore with Store {
   @computed
   bool get isPasswordValid => password.length >= 6;
 
-  @computed
-  bool get isFormValid => isEmailValid && isPasswordValid;
+  // @computed
+  // bool get isFormValid => isEmailValid && isPasswordValid;
 }
