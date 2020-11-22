@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:state_mobx/stores/login_store.dart';
 import 'package:state_mobx/widgets/custom_icon_button.dart';
 import 'package:state_mobx/widgets/custom_text_field.dart';
@@ -15,13 +16,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  LoginStore loginStore = LoginStore();
+  LoginStore loginStore;
 
   ReactionDisposer disposer;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+    loginStore = Provider.of<LoginStore>(context);
 
     /** Реакция на вход в систему
      * Первый аргумент принимает значение за которым нужно следить.
