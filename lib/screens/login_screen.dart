@@ -82,9 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         iconData: loginStore.passwordVisible
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        onTap: () {
-                          loginStore.togglePasswordVisibility();
-                        },
+                        onTap: loginStore.togglePasswordVisibility,
                       ),
                     );
                   }),
@@ -113,9 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           disabledColor:
                               Theme.of(context).primaryColor.withAlpha(100),
                           textColor: Colors.white,
-                          onPressed: () {
-                            loginStore.loginPressed();
-                          },
+                          onPressed: loginStore.loginPressed,
                         ),
                       );
                     },
