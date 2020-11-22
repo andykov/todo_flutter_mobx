@@ -43,20 +43,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  CustomTextField(
-                    hint: 'Senha',
-                    prefix: Icon(Icons.lock),
-                    obscure: true,
-                    onChanged: (pass) {
-                      loginStore.setPassword(pass);
-                    },
-                    enabled: true,
-                    suffix: CustomIconButton(
-                      radius: 32,
-                      iconData: Icons.visibility,
-                      onTap: () {},
-                    ),
-                  ),
+                  Observer(builder: (_) {
+                    return CustomTextField(
+                      hint: 'Senha',
+                      prefix: Icon(Icons.lock),
+                      obscure: loginStore.passwordVisible,
+                      onChanged: (pass) {
+                        loginStore.setPassword(pass);
+                      },
+                      enabled: true,
+                      suffix: CustomIconButton(
+                        radius: 32,
+                        iconData: loginStore.passwordVisible ? 
+                        Icons.visibility_off : Icons.visibility,
+                        onTap: () {
+                          loginStore.togglePasswordVisibility();
+                        },
+                      ),
+                    );
+                  }),
                   const SizedBox(
                     height: 16,
                   ),
@@ -73,11 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           disabledColor:
                               Theme.of(context).primaryColor.withAlpha(100),
                           textColor: Colors.white,
-                          onPressed: loginStore.isFormValid ? () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => ListScreen()),
-                            );
-                          } : null,
+                          onPressed: loginStore.isFormValid
+                              ? () {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => ListScreen()),
+                                  );
+                                }
+                              : null,
                         ),
                       );
                     },
