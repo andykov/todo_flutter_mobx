@@ -83,11 +83,20 @@ class _ListScreenState extends State<ListScreen> {
                               return ListView.separated(
                                 itemCount: listStore.todoList.length,
                                 itemBuilder: (_, index) {
-                                  return ListTile(
-                                    title: Text(
-                                      listStore.todoList[index],
-                                    ),
-                                    onTap: () {},
+                                  final todo = listStore.todoList[index];
+                                  return Observer(
+                                    builder: (_) {
+                                      return ListTile(
+                                        title: Text(
+                                          todo.title,
+                                          style: TextStyle(
+                                            decoration: todo.done ? TextDecoration.lineThrough : null,
+                                            color: todo.done ? Colors.grey : Colors.black 
+                                          ),
+                                        ),
+                                        onTap: todo.toggleDone,
+                                      );
+                                    },
                                   );
                                 },
                                 separatorBuilder: (_, __) {

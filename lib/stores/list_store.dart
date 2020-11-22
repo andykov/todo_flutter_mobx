@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:state_mobx/stores/todo_store.dart';
 
 part 'list_store.g.dart';
 
@@ -26,10 +27,10 @@ abstract class _ListStore with Store {
   // }
 
   // [2 Вариант] добавления и создания нового списка (Правильный способ)
-  ObservableList<String> todoList = ObservableList<String>();
+  ObservableList<TodoStore> todoList = ObservableList<TodoStore>();
 
   @action
   void addTodo() {
-    todoList.add(newTodoTitle);
+    todoList.add(TodoStore(newTodoTitle));
   }
 }
