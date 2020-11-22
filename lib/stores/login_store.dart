@@ -32,6 +32,17 @@ abstract class _LoginStore with Store {
   @action
   void togglePasswordVisibility() => passwordVisible = !passwordVisible;
 
+  @observable
+  bool loading = false;
+
+  Future<void> login() async {
+    loading = true;
+
+    await Future.delayed(Duration(seconds: 2));
+
+    loading = false;
+  }
+
   // Простая валидация полей
   @computed
   bool get isEmailValid => RegExp(
@@ -43,5 +54,4 @@ abstract class _LoginStore with Store {
 
   @computed
   bool get isFormValid => isEmailValid && isPasswordValid;
-
 }

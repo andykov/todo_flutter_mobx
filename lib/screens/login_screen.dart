@@ -32,14 +32,17 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  CustomTextField(
+                  Observer(builder: (_) {
+                    return CustomTextField(
                       hint: 'E-mail',
                       prefix: Icon(Icons.account_circle),
                       textInputType: TextInputType.emailAddress,
                       onChanged: (email) {
                         loginStore.setEmail(email);
                       },
-                      enabled: true),
+                      enabled: !loginStore.loading,
+                    );
+                  }),
                   const SizedBox(
                     height: 16,
                   ),
@@ -51,11 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       onChanged: (pass) {
                         loginStore.setPassword(pass);
                       },
-                      enabled: true,
+                      enabled: !loginStore.loading,
                       suffix: CustomIconButton(
                         radius: 32,
-                        iconData: loginStore.passwordVisible ? 
-                        Icons.visibility_off : Icons.visibility,
+                        iconData: loginStore.passwordVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                         onTap: () {
                           loginStore.togglePasswordVisibility();
                         },
@@ -73,17 +77,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(32),
                           ),
-                          child: Text('Login'),
+                          child: loginStore.loading
+                              ? SizedBox(
+                                  child: CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation(Colors.white),
+                                  ),
+                                  height: 20.0,
+                                  width: 20.0,
+                                )
+                              : Text('Login'),
                           color: Theme.of(context).primaryColor,
                           disabledColor:
                               Theme.of(context).primaryColor.withAlpha(100),
                           textColor: Colors.white,
                           onPressed: loginStore.isFormValid
                               ? () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => ListScreen()),
-                                  );
+                                  loginStore.login();
+                                  // Navigator.of(context).pushReplacement(
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => ListScreen()),
+                                  // );
                                 }
                               : null,
                         ),
