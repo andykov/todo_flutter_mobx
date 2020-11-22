@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:state_mobx/stores/list_store.dart';
+import 'package:state_mobx/stores/login_store.dart';
 import 'package:state_mobx/widgets/custom_icon_button.dart';
 import 'package:state_mobx/widgets/custom_text_field.dart';
 
@@ -44,6 +46,7 @@ class _ListScreenState extends State<ListScreen> {
                       icon: Icon(Icons.exit_to_app),
                       color: Colors.white,
                       onPressed: () {
+                        Provider.of<LoginStore>(context, listen: false).logout();
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => LoginScreen(),
                         ));

@@ -50,6 +50,9 @@ abstract class _LoginStore with Store {
 
     loading = false;
     loggedIn = true;
+
+    email = "";
+    password = "";
   }
 
   // Простая валидация полей
@@ -63,4 +66,9 @@ abstract class _LoginStore with Store {
 
   // @computed
   // bool get isFormValid => isEmailValid && isPasswordValid;
+
+  @action
+  void logout() {
+    loggedIn = false;
+  }
 }
