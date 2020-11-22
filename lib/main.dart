@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:state_mobx/screens/login_screen.dart';
-import 'package:state_mobx/stores/login_store.dart';
+import 'package:todo_flutter_mobx/screens/login_screen.dart';
+import 'package:todo_flutter_mobx/stores/login_store.dart';
 
 void main() => runApp(MyApp());
 

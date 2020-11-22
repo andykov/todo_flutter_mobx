@@ -1,4 +1,4 @@
-package com.example.state_mobx
+package com.example.todo_flutter_mobx
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:state_mobx/stores/todo_store.dart';
+import 'package:todo_flutter_mobx/stores/todo_store.dart';
 
 part 'list_store.g.dart';
 

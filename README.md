@@ -1,4 +1,4 @@
-# state_mobx
+# todo_flutter_mobx
 
 A new Flutter project.
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:state_mobx/stores/login_store.dart';
-import 'package:state_mobx/widgets/custom_icon_button.dart';
-import 'package:state_mobx/widgets/custom_text_field.dart';
+import 'package:todo_flutter_mobx/stores/login_store.dart';
+import 'package:todo_flutter_mobx/widgets/custom_icon_button.dart';
+import 'package:todo_flutter_mobx/widgets/custom_text_field.dart';
 
 import 'list_screen.dart';
 

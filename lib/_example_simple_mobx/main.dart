@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:state_mobx/_example_simple_mobx/counter.dart';
+import 'package:todo_flutter_mobx/_example_simple_mobx/counter.dart';
 
 void main() {
   runApp(MyApp());

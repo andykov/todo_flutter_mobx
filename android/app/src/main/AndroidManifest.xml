@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.state_mobx">
+    package="com.example.todo_flutter_mobx">
    <application
-        android:label="state_mobx"
+        android:label="todo_flutter_mobx"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
